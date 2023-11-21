@@ -1,0 +1,390 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище SmartStoreModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="HomeAssistant">
+          <Key>
+            <PropertyRef Name="ID_HA" />
+          </Key>
+          <Property Name="ID_HA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Volume" Type="int" />
+          <Property Name="ID_P" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Lamps">
+          <Key>
+            <PropertyRef Name="ID_L" />
+          </Key>
+          <Property Name="ID_L" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Voltage" Type="int" />
+          <Property Name="ID_P" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Lock">
+          <Key>
+            <PropertyRef Name="ID_Lock" />
+          </Key>
+          <Property Name="ID_Lock" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumbKey" Type="int" />
+          <Property Name="ID_P" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ID_P" />
+          </Key>
+          <Property Name="ID_P" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Price" Type="int" />
+          <Property Name="Brand" Type="varchar" MaxLength="50" />
+          <Property Name="ComProtocol" Type="varchar" MaxLength="100" />
+          <Property Name="code" Type="varchar" MaxLength="21" />
+        </EntityType>
+        <EntityType Name="Socket">
+          <Key>
+            <PropertyRef Name="ID_S" />
+          </Key>
+          <Property Name="ID_S" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="50" />
+          <Property Name="ID_P" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Termostat">
+          <Key>
+            <PropertyRef Name="ID_T" />
+          </Key>
+          <Property Name="ID_T" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MinTemp" Type="int" />
+          <Property Name="MaxTemp" Type="int" />
+          <Property Name="ID_P" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_HomeAssistant_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="HomeAssistant" Type="Self.HomeAssistant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID_P" />
+            </Principal>
+            <Dependent Role="HomeAssistant">
+              <PropertyRef Name="ID_P" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lamps_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Lamps" Type="Self.Lamps" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID_P" />
+            </Principal>
+            <Dependent Role="Lamps">
+              <PropertyRef Name="ID_P" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lock_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Lock" Type="Self.Lock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID_P" />
+            </Principal>
+            <Dependent Role="Lock">
+              <PropertyRef Name="ID_P" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Socket_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Socket" Type="Self.Socket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID_P" />
+            </Principal>
+            <Dependent Role="Socket">
+              <PropertyRef Name="ID_P" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Termostat_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Termostat" Type="Self.Termostat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID_P" />
+            </Principal>
+            <Dependent Role="Termostat">
+              <PropertyRef Name="ID_P" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище SmartStoreModelContainer">
+          <EntitySet Name="HomeAssistant" EntityType="Self.HomeAssistant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lamps" EntityType="Self.Lamps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lock" EntityType="Self.Lock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Socket" EntityType="Self.Socket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Termostat" EntityType="Self.Termostat" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_HomeAssistant_Product" Association="Self.FK_HomeAssistant_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="HomeAssistant" EntitySet="HomeAssistant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lamps_Product" Association="Self.FK_Lamps_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Lamps" EntitySet="Lamps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lock_Product" Association="Self.FK_Lock_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Lock" EntitySet="Lock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Socket_Product" Association="Self.FK_Socket_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Socket" EntitySet="Socket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Termostat_Product" Association="Self.FK_Termostat_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Termostat" EntitySet="Termostat" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SmartStoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="HomeAssistant">
+          <Key>
+            <PropertyRef Name="ID_HA" />
+          </Key>
+          <Property Name="ID_HA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Volume" Type="Int32" />
+          <Property Name="ID_P" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_HomeAssistant_Product" FromRole="HomeAssistant" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Lamp">
+          <Key>
+            <PropertyRef Name="ID_L" />
+          </Key>
+          <Property Name="ID_L" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Voltage" Type="Int32" />
+          <Property Name="ID_P" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Lamps_Product" FromRole="Lamps" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Lock">
+          <Key>
+            <PropertyRef Name="ID_Lock" />
+          </Key>
+          <Property Name="ID_Lock" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumbKey" Type="Int32" />
+          <Property Name="ID_P" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Lock_Product" FromRole="Lock" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ID_P" />
+          </Key>
+          <Property Name="ID_P" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="Int32" />
+          <Property Name="Brand" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ComProtocol" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="code" Type="String" MaxLength="21" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="HomeAssistants" Relationship="Self.FK_HomeAssistant_Product" FromRole="Product" ToRole="HomeAssistant" />
+          <NavigationProperty Name="Lamps" Relationship="Self.FK_Lamps_Product" FromRole="Product" ToRole="Lamps" />
+          <NavigationProperty Name="Locks" Relationship="Self.FK_Lock_Product" FromRole="Product" ToRole="Lock" />
+          <NavigationProperty Name="Sockets" Relationship="Self.FK_Socket_Product" FromRole="Product" ToRole="Socket" />
+          <NavigationProperty Name="Termostats" Relationship="Self.FK_Termostat_Product" FromRole="Product" ToRole="Termostat" />
+        </EntityType>
+        <EntityType Name="Socket">
+          <Key>
+            <PropertyRef Name="ID_S" />
+          </Key>
+          <Property Name="ID_S" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ID_P" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Socket_Product" FromRole="Socket" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Termostat">
+          <Key>
+            <PropertyRef Name="ID_T" />
+          </Key>
+          <Property Name="ID_T" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MinTemp" Type="Int32" />
+          <Property Name="MaxTemp" Type="Int32" />
+          <Property Name="ID_P" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Termostat_Product" FromRole="Termostat" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_HomeAssistant_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="HomeAssistant" Type="Self.HomeAssistant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID_P" />
+            </Principal>
+            <Dependent Role="HomeAssistant">
+              <PropertyRef Name="ID_P" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lamps_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Lamps" Type="Self.Lamp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID_P" />
+            </Principal>
+            <Dependent Role="Lamps">
+              <PropertyRef Name="ID_P" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lock_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Lock" Type="Self.Lock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID_P" />
+            </Principal>
+            <Dependent Role="Lock">
+              <PropertyRef Name="ID_P" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Socket_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Socket" Type="Self.Socket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID_P" />
+            </Principal>
+            <Dependent Role="Socket">
+              <PropertyRef Name="ID_P" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Termostat_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Termostat" Type="Self.Termostat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID_P" />
+            </Principal>
+            <Dependent Role="Termostat">
+              <PropertyRef Name="ID_P" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SmartStoreEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="HomeAssistants" EntityType="Self.HomeAssistant" />
+          <EntitySet Name="Lamps" EntityType="Self.Lamp" />
+          <EntitySet Name="Locks" EntityType="Self.Lock" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="Sockets" EntityType="Self.Socket" />
+          <EntitySet Name="Termostats" EntityType="Self.Termostat" />
+          <AssociationSet Name="FK_HomeAssistant_Product" Association="Self.FK_HomeAssistant_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="HomeAssistant" EntitySet="HomeAssistants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lamps_Product" Association="Self.FK_Lamps_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Lamps" EntitySet="Lamps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lock_Product" Association="Self.FK_Lock_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Lock" EntitySet="Locks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Socket_Product" Association="Self.FK_Socket_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Socket" EntitySet="Sockets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Termostat_Product" Association="Self.FK_Termostat_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Termostat" EntitySet="Termostats" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище SmartStoreModelContainer" CdmEntityContainer="SmartStoreEntities1">
+          <EntitySetMapping Name="HomeAssistants">
+            <EntityTypeMapping TypeName="SmartStoreModel.HomeAssistant">
+              <MappingFragment StoreEntitySet="HomeAssistant">
+                <ScalarProperty Name="ID_HA" ColumnName="ID_HA" />
+                <ScalarProperty Name="Volume" ColumnName="Volume" />
+                <ScalarProperty Name="ID_P" ColumnName="ID_P" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lamps">
+            <EntityTypeMapping TypeName="SmartStoreModel.Lamp">
+              <MappingFragment StoreEntitySet="Lamps">
+                <ScalarProperty Name="ID_L" ColumnName="ID_L" />
+                <ScalarProperty Name="Voltage" ColumnName="Voltage" />
+                <ScalarProperty Name="ID_P" ColumnName="ID_P" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Locks">
+            <EntityTypeMapping TypeName="SmartStoreModel.Lock">
+              <MappingFragment StoreEntitySet="Lock">
+                <ScalarProperty Name="ID_Lock" ColumnName="ID_Lock" />
+                <ScalarProperty Name="NumbKey" ColumnName="NumbKey" />
+                <ScalarProperty Name="ID_P" ColumnName="ID_P" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="SmartStoreModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="ID_P" ColumnName="ID_P" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
+                <ScalarProperty Name="ComProtocol" ColumnName="ComProtocol" />
+                <ScalarProperty Name="code" ColumnName="code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sockets">
+            <EntityTypeMapping TypeName="SmartStoreModel.Socket">
+              <MappingFragment StoreEntitySet="Socket">
+                <ScalarProperty Name="ID_S" ColumnName="ID_S" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="ID_P" ColumnName="ID_P" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Termostats">
+            <EntityTypeMapping TypeName="SmartStoreModel.Termostat">
+              <MappingFragment StoreEntitySet="Termostat">
+                <ScalarProperty Name="ID_T" ColumnName="ID_T" />
+                <ScalarProperty Name="MinTemp" ColumnName="MinTemp" />
+                <ScalarProperty Name="MaxTemp" ColumnName="MaxTemp" />
+                <ScalarProperty Name="ID_P" ColumnName="ID_P" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

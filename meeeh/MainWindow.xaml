@@ -1,0 +1,17 @@
+﻿<Window x:Class="meeeh.MainWindow"
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:meeeh"
+    mc:Ignorable="d"
+    Title="MainWindow" Height="450" Width="800">
+    <Grid
+    Name = "grid">
+        <Frame Name="frame1" Margin="3" />
+        <TextBlock TextWrapping="Wrap" RenderTransformOrigin="0.5,0.5" Height="71" FontSize="40" FontFamily="Century Gothic" Margin="523,360,0,3" HorizontalAlignment="Left">
+        <Hyperlink   NavigateUri ="Page1.xaml" Click="Hyperlink_Click"> <Run Text="Page 1" />
+        </Hyperlink></TextBlock>
+
+    </Grid>
+</Window>
